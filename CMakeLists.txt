@@ -12,6 +12,7 @@ set(public_headers
 
 add_library(ActsDD4hep INTERFACE ${public_headers})
 target_link_libraries(ActsDD4hep INTERFACE DD4hep::DDCore)
+target_include_directories(ActsDD4hep INTERFACE include)
 set_target_properties(ActsDD4hep PROPERTIES PUBLIC_HEADER "${public_headers}")
 
 install(

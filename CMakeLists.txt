@@ -6,5 +6,9 @@ target_include_directories(ActsDD4hep INTERFACE include)
 target_link_libraries(ActsDD4hep INTERFACE DD4hep::DDCore)
 
 install(
-  DIRECTORY include/ActsDD4hep
-  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+  TARGETS ActsDD4hep
+  EXPORT ActsDD4hepTargets
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+# install(
+  # DIRECTORY include/ActsDD4hep
+  # DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})

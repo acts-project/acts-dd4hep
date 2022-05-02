@@ -10,7 +10,7 @@ set(public_headers
 )
 
 
-add_library(ActsDD4hep INTERFACE ${public_headers})
+add_library(ActsDD4hep INTERFACE)
 add_library(ActsDD4hep::ActsDD4hep ALIAS ActsDD4hep)
 target_link_libraries(ActsDD4hep INTERFACE DD4hep::DDCore)
 target_include_directories(

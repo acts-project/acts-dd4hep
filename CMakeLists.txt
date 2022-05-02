@@ -11,6 +11,7 @@ set(public_headers
 
 
 add_library(ActsDD4hep INTERFACE ${public_headers})
+# add_library(ActsDD4hep::ActsDD4hep ALIAS ActsDD4hep)
 target_link_libraries(ActsDD4hep INTERFACE DD4hep::DDCore)
 target_include_directories(
   ActsDD4hep
@@ -18,6 +19,7 @@ target_include_directories(
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 set_target_properties(ActsDD4hep PROPERTIES PUBLIC_HEADER "${public_headers}")
+set_target_properties(ActsDD4hep PROPERTIES EXPORT_NAME ActsDD4hep::ActsDD4hep)
 
 install(
   TARGETS ActsDD4hep

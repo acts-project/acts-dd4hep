@@ -11,7 +11,7 @@ set(public_headers
 
 
 add_library(ActsDD4hep INTERFACE ${public_headers})
-# add_library(ActsDD4hep::ActsDD4hep ALIAS ActsDD4hep)
+add_library(ActsDD4hep::ActsDD4hep ALIAS ActsDD4hep)
 target_link_libraries(ActsDD4hep INTERFACE DD4hep::DDCore)
 target_include_directories(
   ActsDD4hep
@@ -31,3 +31,16 @@ install(
   EXPORT ActsDD4hepTargets 
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/ActsDD4hep)
 
+include(CMakePackageConfigHelpers)
+set(install_package_config_dir "${CMAKE_INSTALL_LIBDIR}/cmake/ActsDD4hep")
+
+configure_package_config_file(
+  ${CMAKE_CURRENT_LIST_DIR}/ActsDD4hepConfig.cmake.in
+  ${PROJECT_BINARY_DIR}/ActsDD4hepConfig.cmake
+  INSTALL_DESTINATION ${install_package_config_dir}
+  PATH_VARS CMAKE_INSTALL_BINDIR CMAKE_INSTALL_INCLUDEDIR CMAKE_INSTALL_LIBDIR)
+
+install(
+  FILES
+  ${PROJECT_BINARY_DIR}/ActsDD4hepConfig.cmake
+  DESTINATION ${install_package_config_dir})

@@ -1,5 +1,5 @@
 cmake_minimum_required( VERSION 3.14 )
-project( ActsDD4hep VERSION 0.1 LANGUAGES CXX )
+project( ActsDD4hep VERSION 1.0.0 LANGUAGES CXX )
 
 include(GNUInstallDirs) # GNU-like installation paths, e.g. lib/, include/, ...
 
@@ -35,6 +35,9 @@ install(
 include(CMakePackageConfigHelpers)
 set(install_package_config_dir "${CMAKE_INSTALL_LIBDIR}/cmake/ActsDD4hep")
 
+write_basic_package_version_file(
+  ${PROJECT_BINARY_DIR}/ActsDD4hepConfigVersion.cmake
+  COMPATIBILITY SameMajorVersion)
 configure_package_config_file(
   ${CMAKE_CURRENT_LIST_DIR}/ActsDD4hepConfig.cmake.in
   ${PROJECT_BINARY_DIR}/ActsDD4hepConfig.cmake
@@ -44,4 +47,5 @@ configure_package_config_file(
 install(
   FILES
   ${PROJECT_BINARY_DIR}/ActsDD4hepConfig.cmake
+  ${PROJECT_BINARY_DIR}/ActsDD4hepConfigVersion.cmake
   DESTINATION ${install_package_config_dir})

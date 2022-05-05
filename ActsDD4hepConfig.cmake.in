@@ -1,15 +1,10 @@
-# CMake config for the Acts package
+# CMake config for the ActsDD4hep package
 #
 # Defines CMake targets for requested and available components.  All additional
 # information, e.g. include directories and dependencies, are defined as
 # target-specific properties and are automatically propagated when linking to
 # the target.
 #
-# Defines the following additional variables:
-#
-#   - Acts_COMPONENTS
-#   - Acts_COMMIT_HASH
-#   - Acts_COMMIT_HASH_SHORT
 
 @PACKAGE_INIT@
 

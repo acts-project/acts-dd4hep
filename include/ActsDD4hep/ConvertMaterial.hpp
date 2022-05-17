@@ -13,10 +13,11 @@
 
 #include <DD4hep/DetElement.h>
 #include <DD4hep/DetFactoryHelper.h>
-
-#include "XML/XMLElements.h"
+#include <DDRec/DetectorData.h>
 #include <boost/foreach.hpp>
 #include <boost/tokenizer.hpp>
+
+#include "XML/XMLElements.h"
 
 namespace Acts {
 
@@ -34,11 +35,15 @@ namespace Acts {
 void xmlToProtoSurfaceMaterial(const xml_comp_t& x_material,
                                ActsExtension& actsExtension,
                                const std::string& baseTag);
-}
+
+void xmlToProtoSurfaceMaterial(const xml_comp_t& x_material,
+                               dd4hep::rec::VariantParameters& params,
+                               const std::string& baseTag);
+}  // namespace Acts
 
 inline void Acts::xmlToProtoSurfaceMaterial(const xml_comp_t& x_material,
-                                     ActsExtension& actsExtension,
-                                     const std::string& baseTag) {
+                                            ActsExtension& actsExtension,
+                                            const std::string& baseTag) {
   // Add the layer material flag
   actsExtension.addType(baseTag);
   // prepare everything here
@@ -58,5 +63,31 @@ inline void Acts::xmlToProtoSurfaceMaterial(const xml_comp_t& x_material,
     std::string btmSurface = baseTag + std::string("_") + mSurface;
     actsExtension.addValue(nBins0, bin0, btmSurface);
     actsExtension.addValue(nBins1, bin1, btmSurface);
+  }
+}
+
+inline void Acts::xmlToProtoSurfaceMaterial(
+    const xml_comp_t& x_material, dd4hep::rec::VariantParameters& params,
+    const std::string& baseTag) {
+  using namespace std::string_literals;
+  // Add the layer material flag
+  params.set(baseTag, true);
+  // prepare everything here
+  std::string mSurface = x_material.attr<std::string>("surface");
+  std::string mBinning = x_material.attr<std::string>("binning");
+  boost::char_separator<char> sep(",");
+  boost::tokenizer binTokens(mBinning, sep);
+  const auto n = std::distance(binTokens.begin(), binTokens.end());
+  if (n == 2) {
+    // Fill the bins
+    auto bin = binTokens.begin();
+    std::string bin0 = *(bin);
+    std::string bin1 = *(++bin);
+    size_t nBins0 = x_material.attr<int>("bins0");
+    size_t nBins1 = x_material.attr<int>("bins1");
+    // Add the material tags
+    std::string btmSurface = baseTag + "_"s + mSurface;
+    params.set<int>(btmSurface + "_"s + bin0, nBins0);
+    params.set<int>(btmSurface + "_"s + bin1, nBins1);
   }
 }

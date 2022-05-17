@@ -13,7 +13,7 @@ find_package(DD4hep 1.11 REQUIRED CONFIG COMPONENTS DDCore DDDetectors)
 
 add_library(ActsDD4hep INTERFACE)
 add_library(ActsDD4hep::ActsDD4hep ALIAS ActsDD4hep)
-target_link_libraries(ActsDD4hep INTERFACE DD4hep::DDCore)
+target_link_libraries(ActsDD4hep INTERFACE DD4hep::DDCore DD4hep::DDRec)
 target_include_directories(
   ActsDD4hep
   INTERFACE

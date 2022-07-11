@@ -1,5 +1,5 @@
 cmake_minimum_required( VERSION 3.15 )
-project( ActsDD4hep VERSION 1.0.0 LANGUAGES CXX )
+project( ActsDD4hep VERSION 1.0.1 LANGUAGES CXX )
 
 include(GNUInstallDirs) # GNU-like installation paths, e.g. lib/, include/, ...
 

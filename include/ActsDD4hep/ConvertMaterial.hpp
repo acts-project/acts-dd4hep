@@ -87,6 +87,7 @@ inline void Acts::xmlToProtoSurfaceMaterial(
     size_t nBins1 = x_material.attr<int>("bins1");
     // Add the material tags
     std::string btmSurface = baseTag + "_"s + mSurface;
+    params.set<bool>(btmSurface, true);
     params.set<int>(btmSurface + "_"s + bin0, nBins0);
     params.set<int>(btmSurface + "_"s + bin1, nBins1);
   }
